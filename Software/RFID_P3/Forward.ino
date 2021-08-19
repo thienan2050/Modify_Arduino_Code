@@ -11,7 +11,7 @@ void Forward()
   //trigg = true;
   bool disp = true;
   NG_Status = false;
-  while (digitalRead(fin) == 0)
+  while ((digitalRead(fin) == 0) && (!(ReadIo() & 0x10) || prox_bypass))
   {
     pixels.setPixelColor(0, pixels.Color(0, 255, 255));
     pixels.setPixelColor(1, pixels.Color(0, 255, 255));
@@ -65,6 +65,9 @@ void Forward()
   By_Pass2 = false;
   MsTimer2::stop();
   detachInterrupt(digitalPinToInterrupt(2));
+  /* sw_flag is waiting for the re-active only once CLAIM is pressed again. */
+  sw_flag = false; 
+  exit_forward = true;
 }
 //--------------------------------------Timer Interrupts--------------------------------
 void LT_Timer()

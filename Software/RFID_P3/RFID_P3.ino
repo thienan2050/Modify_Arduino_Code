@@ -44,6 +44,7 @@ int SC_Counter, sc, Prev_SC_Counter;
 long int  a, b;
 int s_count = 0;
 bool Master_Status = false, MQ = false, Clamp1_Status = false, Clamp2_Status = false, NG_Status = false;
+bool sw_flag = true, sw_bypass = false, prox_bypass = false, exit_forward = false, firstTime = true;
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(4, 5, NEO_GRB + NEO_KHZ800);//Stage 1
@@ -324,9 +325,20 @@ void loop() {
     WriteIo(B00011111);
   }
 
-  if (digitalRead(fin) == 0)// && By_Pass1 && By_Pass2)
+  /* CLAMP{SW button and Prox signal} is LOW again and out of Forward function */
+  if(!(ReadIo() & 0x08) && !(ReadIo() & 0x10) && (exit_forward == true) && (firstTime == false))
+  {
+    sw_flag = true;
+    exit_forward = false;
+  }
+  /* Do not check Clamp, out of forward function and SW for the first time. */
+  if(!(ReadIo() & 0x08) && (firstTime == true))
+  {
+    firstTime = false;
+    sw_flag = true;
+  }
+  if ((digitalRead(fin) == 0) && (sw_flag || sw_bypass) && (!(ReadIo() & 0x10) || prox_bypass ))
     Forward();
-
   if (digitalRead(rin) == 0 && Rev_State && digitalRead(fin) == 0)
     Reverse();
 }

@@ -565,10 +565,10 @@ void Clamp1()
   {
     if (Clamp1_Status) {
       lcd.clear();
-      lcd.setCursor(4, 0);
-      lcd.print("Clamp 1");
-      lcd.setCursor(3, 1);
-      lcd.print("State ON");
+      lcd.setCursor(0, 0);
+      lcd.print("Clamp 1 : ON");
+      lcd.setCursor(0, 1);
+      lcd.print("SW_bypass = T");
       setrow(0, 3, 0x01);
       setrow(0, 2, 0x7e);
       setrow(0, 1, 0x15);
@@ -577,10 +577,10 @@ void Clamp1()
     else
     {
       lcd.clear();
-      lcd.setCursor(4, 0);
-      lcd.print("Clamp 1");
-      lcd.setCursor(3, 1);
-      lcd.print("State OFF");
+      lcd.setCursor(0, 0);
+      lcd.print("Clamp 1 : OFF");
+      lcd.setCursor(0, 1);
+      lcd.print("SW_bypass = F");
       setrow(0, 3, 0x7e);
       setrow(0, 2, 0x47);
       setrow(0, 1, 0x47);
@@ -593,11 +593,13 @@ void Clamp1()
         Clamp1_Status = !Clamp1_Status;
 
       if (Clamp1_Status) {
+        /* Set sw_bypass = true. */
+        sw_bypass = true;
         lcd.clear();
-        lcd.setCursor(4, 0);
-        lcd.print("Clamp 1");
-        lcd.setCursor(3, 1);
-        lcd.print("State ON");
+        lcd.setCursor(0, 0);
+        lcd.print("Clamp 1 : ON");
+        lcd.setCursor(0, 1);
+        lcd.print("SW_bypass = T");
         setrow(0, 3, 0x01);
         setrow(0, 2, 0x7e);
         setrow(0, 1, 0x15);
@@ -605,11 +607,13 @@ void Clamp1()
       }
       else
       {
+        /* Set sw_bypass = false. */
+        sw_bypass = false;
         lcd.clear();
-        lcd.setCursor(4, 0);
-        lcd.print("Clamp 1");
-        lcd.setCursor(3, 1);
-        lcd.print("State OFF");
+        lcd.setCursor(0, 0);
+        lcd.print("Clamp 1 : OFF");
+        lcd.setCursor(0, 1);
+        lcd.print("SW_bypass = F");
         setrow(0, 3, 0x7e);
         setrow(0, 2, 0x47);
         setrow(0, 1, 0x47);
@@ -637,10 +641,10 @@ void Clamp2()
   {
     if (Clamp2_Status) {
       lcd.clear();
-      lcd.setCursor(4, 0);
-      lcd.print("Clamp 2");
-      lcd.setCursor(3, 1);
-      lcd.print("State ON");
+      lcd.setCursor(0, 0);
+      lcd.print("Clamp 2 : ON");
+      lcd.setCursor(0, 1);
+      lcd.print("Pro_bypass = T");
       setrow(0, 3, 0x01);
       setrow(0, 2, 0x7e);
       setrow(0, 1, 0x15);
@@ -649,10 +653,10 @@ void Clamp2()
     else
     {
       lcd.clear();
-      lcd.setCursor(4, 0);
-      lcd.print("Clamp 2");
-      lcd.setCursor(3, 1);
-      lcd.print("State OFF");
+      lcd.setCursor(0, 0);
+      lcd.print("Clamp 2 : OFF");
+      lcd.setCursor(0, 1);
+      lcd.print("Pro_bypass = F");
       setrow(0, 3, 0x7e);
       setrow(0, 2, 0x47);
       setrow(0, 1, 0x47);
@@ -665,11 +669,13 @@ void Clamp2()
         Clamp2_Status = !Clamp2_Status;
 
       if (Clamp2_Status) {
+        /* Set prox_bypass = true. */
+        prox_bypass = true;
         lcd.clear();
-        lcd.setCursor(4, 0);
-        lcd.print("Clamp 2");
-        lcd.setCursor(3, 1);
-        lcd.print("State ON");
+        lcd.setCursor(0, 0);
+        lcd.print("Clamp 2 : ON");
+        lcd.setCursor(0, 1);
+        lcd.print("Prox_bypass = T");
         setrow(0, 3, 0x01);
         setrow(0, 2, 0x7e);
         setrow(0, 1, 0x15);
@@ -677,11 +683,13 @@ void Clamp2()
       }
       else
       {
+        /* Set prox_bypass = false. */
+        prox_bypass = false;
         lcd.clear();
-        lcd.setCursor(4, 0);
-        lcd.print("Clamp 2");
-        lcd.setCursor(3, 1);
-        lcd.print("State OFF");
+        lcd.setCursor(0, 0);
+        lcd.print("Clamp 2 : OFF");
+        lcd.setCursor(0, 1);
+        lcd.print("Prox_bypass = F");
         setrow(0, 3, 0x7e);
         setrow(0, 2, 0x47);
         setrow(0, 1, 0x47);
